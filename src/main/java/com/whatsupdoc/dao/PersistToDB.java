@@ -48,13 +48,12 @@ public class PersistToDB {
         if(rs != null && rs.next()){
         	 key = rs.getInt(1);
         }
-        System.out.println(key+"*****");
       
         preparedStmtDoc.setString(1, "Dr.Kapadia");
         preparedStmtDoc.setString(2, "drkapadia@gmail.com");
         preparedStmtDoc.setString(3, "male");
         preparedStmtDoc.setString(4, "M.B.B.S");
-        preparedStmtDoc.setString(5, "022 28734595");
+        preparedStmtDoc.setString(5, "02228734595");
         preparedStmtDoc.setString(6, "+919818234902");
         preparedStmtDoc.setString(7, "/resources/images/doctorimg/0876453.img");
         preparedStmtDoc.setInt(8, key);
@@ -77,13 +76,12 @@ public class PersistToDB {
        if(rs != null && rs.next()){
        	 key = rs.getInt(1);
        }
-       System.out.println(key+"*****");
         
         preparedStmtDoc.setString(1, "Dr.Madison Lockhart");
         preparedStmtDoc.setString(2, "ml@myhealth.com");
         preparedStmtDoc.setString(3, "female");
         preparedStmtDoc.setString(4, "M.D. Orthopedic");
-        preparedStmtDoc.setString(5, "022 87445951");
+        preparedStmtDoc.setString(5, "02287445951");
         preparedStmtDoc.setString(6, "+917827364091");
         preparedStmtDoc.setString(7, "/resources/images/doctorimg/095384.img");
         preparedStmtDoc.setInt(8,key);
@@ -93,7 +91,7 @@ public class PersistToDB {
         preparedStmtDoc.setString(2, "sl@myhealth.com");
         preparedStmtDoc.setString(3, "male");
         preparedStmtDoc.setString(4, "M.D. Orthopedic");
-        preparedStmtDoc.setString(5, "022 87445952");
+        preparedStmtDoc.setString(5, "02287445952");
         preparedStmtDoc.setString(6, "+917827378923");
         preparedStmtDoc.setString(7, "/resources/images/doctorimg/095385.img");
         preparedStmtDoc.setInt(8, key);
@@ -115,20 +113,19 @@ public class PersistToDB {
        if(rs != null && rs.next()){
        	 key = rs.getInt(1);
        }
-       System.out.println(key+"*****");
         
         preparedStmtDoc.setString(1, "Dr.Kunal Bansal");
         preparedStmtDoc.setString(2, "kbansal@lilavati.com");
-        preparedStmtDoc.setString(3, "female");
+        preparedStmtDoc.setString(3, "male");
         preparedStmtDoc.setString(4, "M.D. Neurologist");
-        preparedStmtDoc.setString(5, "022 67555951");
+        preparedStmtDoc.setString(5, "02267555951");
         preparedStmtDoc.setString(6, "+919833456929");
         preparedStmtDoc.setString(7, "/resources/images/doctorimg/087380.img");
         preparedStmtDoc.setInt(8, key);
         preparedStmtDoc.executeUpdate();
         
         preparedStmtDoc.setString(1, "Dr.Kirti Rao");
-        preparedStmtDoc.setString(2, "kbansal@lilavati.com");
+        preparedStmtDoc.setString(2, "krao@lilavati.com");
         preparedStmtDoc.setString(3, "female");
         preparedStmtDoc.setString(4, "M.D. Radiologist");
         preparedStmtDoc.setString(5, "022 67555760");
@@ -138,10 +135,10 @@ public class PersistToDB {
         preparedStmtDoc.executeUpdate();
         
         preparedStmtDoc.setString(1, "Dr. Vatsal Kothari");
-        preparedStmtDoc.setString(2, "kbansal@lilavati.com");
+        preparedStmtDoc.setString(2, "vkothari@lilavati.com");
         preparedStmtDoc.setString(3, "male");
         preparedStmtDoc.setString(4, "M.D");
-        preparedStmtDoc.setString(5, "022 67805760");
+        preparedStmtDoc.setString(5, "02267805760");
         preparedStmtDoc.setString(6, "+919722500187");
         preparedStmtDoc.setString(7, "/resources/images/doctorimg/083475.img");
         preparedStmtDoc.setInt(8, key);
@@ -163,13 +160,12 @@ public class PersistToDB {
        if(rs != null && rs.next()){
        	 key = rs.getInt(1);
        }
-       System.out.println(key+"*****");
         
         preparedStmtDoc.setString(1, "Dr.Vedant Shetty");
         preparedStmtDoc.setString(2, "drshettyvedant@yahoo.com");
         preparedStmtDoc.setString(3, "male");
         preparedStmtDoc.setString(4, "M.D. Urologist");
-        preparedStmtDoc.setString(5, "022 67226760");
+        preparedStmtDoc.setString(5, "02267226760");
         preparedStmtDoc.setString(6, "+919876009223");
         preparedStmtDoc.setString(7, "/resources/images/doctorimg/049365.img");
         preparedStmtDoc.setInt(8, key);
@@ -179,14 +175,50 @@ public class PersistToDB {
         preparedStmtDoc.setString(2, "sharma.d@yahoo.com");
         preparedStmtDoc.setString(3, "female");
         preparedStmtDoc.setString(4, "M.D. Radiologist");
-        preparedStmtDoc.setString(5, "022 67555760");
+        preparedStmtDoc.setString(5, "02267555760");
         preparedStmtDoc.setString(6, "+916987125331");
         preparedStmtDoc.setString(7, "/resources/images/doctorimg/076760.img");
-        preparedStmtDoc.setInt(8, 4);
+        preparedStmtDoc.setInt(8, key);
         preparedStmtDoc.executeUpdate();
         
-        
-        
+        preparedStmtAddr.setString(1, "10 Alka Building");
+        preparedStmtAddr.setString(2, "SV Road");
+        preparedStmtAddr.setString(3, "Mumbai");
+        preparedStmtAddr.setString(4, "MH");
+        preparedStmtAddr.setString(5, "400063");
+        lat = 18.9246002;
+        preparedStmtAddr.setDouble(6,lat);
+        lon = 72.8196001;
+        preparedStmtAddr.setDouble(7, lon);
+        point = "Point("+lat+" "+lon+")";
+        preparedStmtAddr.setString(8, point);
+        preparedStmtAddr.executeUpdate();
+        rs = preparedStmtAddr.getGeneratedKeys();
+       if(rs != null && rs.next()){
+       	 key = rs.getInt(1);
+       }
+       
+       preparedStmtDoc.setString(1, "Dr.Amit Malik");
+       preparedStmtDoc.setString(2, "amalik102@yahoo.com");
+       preparedStmtDoc.setString(3, "male");
+       preparedStmtDoc.setString(4, "M.D. Cardiologist");
+       preparedStmtDoc.setString(5, "02269762229");
+       preparedStmtDoc.setString(6, "+919769953289");
+       preparedStmtDoc.setString(7, "/resources/images/doctorimg/072660.img");
+       preparedStmtDoc.setInt(8, key);
+       preparedStmtDoc.executeUpdate();
+       
+       
+       preparedStmtDoc.setString(1, "Dr.Shaina Malik");
+       preparedStmtDoc.setString(2, "malik_s@gmail.com");
+       preparedStmtDoc.setString(3, "female");
+       preparedStmtDoc.setString(4, "M.D. Ophthalmologist");
+       preparedStmtDoc.setString(5, "02269263221");
+       preparedStmtDoc.setString(6, "+917625427873");
+       preparedStmtDoc.setString(7, "/resources/images/doctorimg/071920.img");
+       preparedStmtDoc.setInt(8, key);
+       preparedStmtDoc.executeUpdate();
+      
         conn.close();
     } catch (Exception e) {
         System.err.println("Got an exception! ");
