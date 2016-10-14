@@ -126,6 +126,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/searchDoctors", method = RequestMethod.GET)
 	public ResponseEntity<Model> handle(HttpServletRequest request, Model model) throws ClassNotFoundException {
+		try{
 		String location = "/myapp/handle";
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set(location, location);
@@ -169,5 +170,9 @@ public class HomeController {
 		ResponseEntity<Model> response = new ResponseEntity<Model>(model, responseHeaders, HttpStatus.CREATED);
 
 		return response;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
