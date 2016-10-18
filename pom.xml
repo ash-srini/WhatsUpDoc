@@ -196,6 +196,13 @@
    			 <artifactId>spring-webmvc-portlet</artifactId>
    			 <version>4.3.3.RELEASE</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.opengis/geoapi -->
+		<dependency>
+		    <groupId>org.opengis</groupId>
+ 		    <artifactId>geoapi</artifactId>
+   			<version>3.0.0</version>
+		</dependency>
+		
 		
 		
 	</dependencies>

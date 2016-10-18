@@ -63,7 +63,7 @@ public class HomeController {
 
 	/* search doctors using given latitude, longitude and radius of search */
 	@RequestMapping(value = "/handleSearchDoctors", method = RequestMethod.GET)
-	public @ResponseBody Collection<Doctor> searchDoctors(Model model, HttpServletRequest request)
+	public @ResponseBody Collection<Doctor> handleSearchDoctors(Model model, HttpServletRequest request)
 			throws ClassNotFoundException {
 
 		String lat = request.getParameter("latitude");
@@ -82,12 +82,25 @@ public class HomeController {
 		 * st_distance(location, POINT(18.9246459, 72.8196200))*1000 > 0.08) AS
 		 * a WHERE d.addressID =a.addressID;
 		 */
-		String point = "POINT(" + lat + "," + lon + "))*1000";
+		String point = "POINT(" + lat + "," + lon + "))";
+		
 		int distInM = Integer.parseInt(distanceLimit) * 1000;
 		String dist = Integer.toString(distInM);
-		String query = "SELECT SQL_CALC_FOUND_ROWS * FROM doctor AS d JOIN (select addressID from address where st_distance_sphere(location,"
-				+ point + " < " + dist + ") AS a ON d.addressID = a.addressID LIMIT " + start + "," + limit + ";";
+		
+		double lonConversion = 111*Math.cos(Double.parseDouble(lon));
+		double minLong = Double.parseDouble(lon)-((Double.parseDouble(distanceLimit)/111));
+		double maxLong = Double.parseDouble(lon)+((Double.parseDouble(distanceLimit)/111));
+		double minLat = Double.parseDouble(lat)-((Double.parseDouble(distanceLimit))/111);
+		double maxLat = Double.parseDouble(lat)+((Double.parseDouble(distanceLimit))/111);
+		
+		String q = "ST_MakeEnvelope(POINT("+minLat+","+minLong+"),POINT("+maxLat+","+maxLong+"))";
+		System.out.println(q);
+
+		String query = "SELECT *, st_distance_sphere(a.location,"+ point + " as dist "
+				+ "FROM doctor AS d JOIN (select addressID, location from address where st_contains("+q+", location))"
+						+ "AS a ON d.addressID = a.addressID order by dist asc LIMIT " + start + "," + limit + ";";
 		System.out.println(query);
+		
 		Connection conn;
 		String url = "jdbc:mysql://localhost:3306/DocSearch";
 		Collection<Doctor> docList = new ArrayList<Doctor>();
@@ -109,10 +122,16 @@ public class HomeController {
 				d.setImageLocationURL(rs.getString(8));
 				docList.add(d);
 			}
-			rs = stmt.executeQuery("SELECT FOUND_ROWS();");
+			
+			query = "SELECT COUNT(*)" + "FROM doctor AS d JOIN (select addressID from address where st_distance_sphere(location,"
+					+ point + " < " + dist + ") AS a ON d.addressID = a.addressID;";
+			
+			rs = stmt.executeQuery(query);
 
-			if (rs.next())
+			if (rs.next()){
 				request.getSession().setAttribute("rowCount", rs.getInt(1));
+				System.out.println(rs.getInt(1)+"%%%%%%%%");
+			}
 			conn.close();
 			return docList;
 
@@ -125,7 +144,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/searchDoctors", method = RequestMethod.GET)
-	public ResponseEntity<Model> handle(HttpServletRequest request, Model model) throws ClassNotFoundException {
+	public ResponseEntity<Model> searchDoctors(HttpServletRequest request, Model model) throws ClassNotFoundException {
 		try{
 		String location = "/myapp/handle";
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -142,10 +161,9 @@ public class HomeController {
 		int rowLimit = end - begin;
 		rowLimit = Math.abs(rowLimit);
 		
+		Collection<Doctor> docList = getDoctorList(lat, lon, distanceLimit, start, limit, request);
 		String count = request.getSession().getAttribute("rowCount").toString();
 		int rowCount = Integer.parseInt(count);
-		
-		Collection<Doctor> docList = getDoctorList(lat, lon, distanceLimit, start, limit, request);
 		
 		if (docList.size() > 0) {
 			model.addAttribute("docList", docList);

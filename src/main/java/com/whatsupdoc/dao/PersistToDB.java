@@ -186,9 +186,9 @@ public class PersistToDB {
         preparedStmtAddr.setString(3, "Mumbai");
         preparedStmtAddr.setString(4, "MH");
         preparedStmtAddr.setString(5, "400063");
-        lat = 18.9246002;
+        lat = 18.9746002;
         preparedStmtAddr.setDouble(6,lat);
-        lon = 72.8196001;
+        lon = 72.8996001;
         preparedStmtAddr.setDouble(7, lon);
         point = "Point("+lat+" "+lon+")";
         preparedStmtAddr.setString(8, point);
